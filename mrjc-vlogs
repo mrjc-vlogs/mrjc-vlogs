@@ -1,0 +1,127 @@
+node_modules
+.next
+.env.local
+.env
+.DS_Store
+
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  images: {
+    remotePatterns: [
+      { protocol: 'https', hostname: 'images.unsplash.com', pathname: '/**' },
+      { protocol: 'https', hostname: 'source.unsplash.com', pathname: '/**' }
+    ]
+  }
+}
+
+module.exports = nextConfig
+
+{
+  "name": "mrjc-vlogs",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "14.0.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "framer-motion": "10.12.5"
+  }
+}
+# MRJC Vlogs — Next.js Starter
+
+This repository is a ready-to-run **Next.js (App Router)** starter for **MRJC Vlogs** with Tailwind CSS and Framer Motion page transitions (swipe left/right + zoom).
+
+## What's included
+- Next.js App Router structure (pages: Home, Vlogs, Gallery, Contact)
+- Tailwind CSS setup
+- Framer Motion page transitions and element animations
+- Social links (YouTube, TikTok, Facebook)
+- Optional automatic YouTube latest-uploads embed (requires API key + channel ID)
+- README + Vercel one-click instructions
+
+---
+
+## Local setup
+
+1. Install dependencies
+```bash
+npm install
+```
+
+2. Run dev server
+```bash
+npm run dev
+# open http://localhost:3000
+```
+
+## YouTube automatic embeds (optional)
+
+To show the **latest uploads** automatically on the Vlogs page, set the following environment variables locally or in your deployment platform (Vercel):
+
+- `YOUTUBE_API_KEY` — your Google API key with YouTube Data API v3 enabled
+- `YOUTUBE_CHANNEL_ID` — your channel ID (not the handle). Example: `UC_x5XG1OV2P6uZZ5FSM9Ttw`
+
+If those variables are set, the site will fetch the latest videos server-side and embed them. If they are not set, a fallback static embed + subscribe link will be shown.
+
+### How to get your Channel ID
+1. Go to your channel page on YouTube. 
+2. Click `Customize Channel` -> `Basic info`, the Channel ID will be displayed. (If you have a handle, you may need to look under advanced settings or use a lookup tool.)
+
+## Vercel one-click deploy
+
+You can deploy to Vercel quickly. Create a new Vercel project and connect your GitHub repo, then add the environment variables `YOUTUBE_API_KEY` and `YOUTUBE_CHANNEL_ID` if you want automatic embeds.
+
+A sample Vercel button (use in a GitHub README):
+
+```md
+[![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/new/git/import?repository-url=https://github.com/USERNAME/REPO_NAME)
+```
+
+When deploying, configure the environment variables in the Vercel dashboard.
+
+## Social links included
+- YouTube: https://www.youtube.com/@mrjcyoutube
+- TikTok: https://www.tiktok.com/@mrjctiktok
+- Facebook: https://www.facebook.com/fbmrjc
+
+---
+
+## Notes & next steps
+- I can also prepare a GitHub repo for you and push these files there.
+- I can add server-side caching for YouTube API requests to avoid quota issues.
+- If you want full automatic TikTok/Facebook embeds, we can wire up oEmbed or APIs (may require tokens).
+
+---
+Enjoy — MRJC Vlogs ready to go!
+
+export default {
+  content: [
+    './app/**/*.{js,ts,jsx,tsx}',
+    './components/**/*.{js,ts,jsx,tsx}',
+  ],
+  theme: {
+    extend: {
+      colors: {
+        mrjcYellow: '#F2C94C',
+        mrjcBlack: '#000000'
+      }
+    }
+  },
+  plugins: [],
+}
+
+# Deploying to Vercel
+
+1. Push this repo to GitHub.
+2. Go to https://vercel.com/new and import your repository.
+3. Set build command: `npm run build`, output directory: (leave empty — Next.js App Router is detected automatically).
+4. Add Environment Variables:
+   - `YOUTUBE_API_KEY` (optional, for dynamic embeds)
+   - `YOUTUBE_CHANNEL_ID` (optional)
+5. Deploy.
